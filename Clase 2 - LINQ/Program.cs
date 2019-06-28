@@ -18,18 +18,38 @@ namespace EjemplosClase2
                 //1.- definimos nuestro data source
                 dbPruebaCursoEntities db = new dbPruebaCursoEntities();
 
-                //se le asigna un valor en segundos, si se le asigna 0 entonces obligamos a EF a esperar la respuesta de SQL
+                //se le asigna un valor en segundos, si se le asigna 0 entonces obligamos a EF a esperar indefinidamente la respuesta de SQL
                 db.Database.CommandTimeout = 0;
 
-                //lazy loading 
+                //Lazy Loading
                 db.Configuration.LazyLoadingEnabled = false;
                 db.Configuration.ProxyCreationEnabled = false;
 
 
                 #region Consulta con Where
+
+          
+                #region Query Syntax
+
                 //var query = from Empleado in db.Empleado
                 //            where Empleado.Salario > 2000M
                 //            select Empleado;
+
+
+
+                #endregion
+
+                #region Method Syntax
+
+                //var query = db.Empleado
+                //                .Where(x => x.Salario > 2000M)
+                //                .Select(x => new
+                //                {
+                //                    x.Nombre,
+                //                    x.Salario
+                //                }).ToList();
+
+                #endregion
 
                 //foreach (var item in query)
                 //{
@@ -38,22 +58,44 @@ namespace EjemplosClase2
 
                 #endregion
 
-
                 #region Consulta Join con Where
 
+            
                 //string departamento = Console.ReadLine();
 
+                //#region Query Syntax
 
-                //var query = from Empleado in db.Empleado
-                //            join Departamento in db.Departamento
-                //            on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
-                //            where Empleado.Salario > 2000M && Departamento.Departamento1.Contains(departamento)
-                //            select new
-                //            {
-                //                Empleado.Nombre,
-                //                Empleado.Salario,
-                //                Departamento =  Departamento.Departamento1
-                //            };
+                ////var query = from Empleado in db.Empleado
+                ////            join Departamento in db.Departamento
+                ////            on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
+                ////            where Empleado.Salario > 2000M && Departamento.Departamento1.Contains(departamento)
+                ////            select new
+                ////            {
+                ////                Empleado.Nombre,
+                ////                Empleado.Salario,
+                ////                Departamento =  Departamento.Departamento1
+                ////            };
+
+
+                //#endregion
+
+                //#region Method Syntax
+
+                //var query = db.Empleado.Join(db.Departamento
+                //    , Empleado => Empleado.CodigoDepartamento
+                //    , Departamento => Departamento.CodigoDepartamento,
+                //    (Empleado, Departamento) => new
+                //    {
+                //        Empleado.Nombre,
+                //        Empleado.Salario,
+                //        Departamento = Departamento.Departamento1
+
+                //    }).Where(x => x.Salario > 2000M && x.Departamento.Contains(departamento)).ToList();
+
+
+
+
+                //#endregion
 
                 //foreach (var item in query)
                 //{
@@ -61,7 +103,6 @@ namespace EjemplosClase2
                 //}
 
                 #endregion
-
 
                 #region Consultas Max y Min 
 
@@ -294,51 +335,51 @@ namespace EjemplosClase2
 
                 #region Consulta Compleja
 
-                var consulta = db.Empleado
-                                    .GroupBy(x => new
-                                    {
-                                        x.CodigoDepartamento,
-                                        x.Departamento.Departamento1
-                                    }).Select(x => new
-                                    {
-                                        x.Key.CodigoDepartamento,
-                                        x.Key.Departamento1,
+                //var consulta = db.Empleado
+                //                    .GroupBy(x => new
+                //                    {
+                //                        x.CodigoDepartamento,
+                //                        x.Departamento.Departamento1
+                //                    }).Select(x => new
+                //                    {
+                //                        x.Key.CodigoDepartamento,
+                //                        x.Key.Departamento1,
 
 
-                                        EmpleadosSalariosMasBajos = db.Empleado
-                                            .Where(y => y.CodigoDepartamento == x.Key.CodigoDepartamento)
-                                            .Select(y => new
-                                            {
-                                                y.CodigoEmpleado,
-                                                y.Nombre,
-                                                y.EmpleadoDireccion.FirstOrDefault().Direccion,
-                                                y.Salario
-                                            }).OrderByDescending(y => y.Salario).Take(5).ToList(),
+                //                        EmpleadosSalariosMasBajos = db.Empleado
+                //                            .Where(y => y.CodigoDepartamento == x.Key.CodigoDepartamento)
+                //                            .Select(y => new
+                //                            {
+                //                                y.CodigoEmpleado,
+                //                                y.Nombre,
+                //                                y.EmpleadoDireccion.FirstOrDefault().Direccion,
+                //                                y.Salario
+                //                            }).OrderByDescending(y => y.Salario).Take(5).ToList(),
 
 
 
 
-                                    }).
-                                    Select(x => new
-                                    {
-                                        CodigoDepartamento = x.CodigoDepartamento == null ? 0 : x.CodigoDepartamento,
-                                        Departamento = x.Departamento1 == null ? "No tiene asignación de departamento" : x.Departamento1,
-                                        x.EmpleadosSalariosMasBajos,
-                                        CodigoEmpleadoSalarioMasAlto = x.EmpleadosSalariosMasBajos.FirstOrDefault().CodigoEmpleado,
-                                        EmpleadoSalarioMasAlto = x.EmpleadosSalariosMasBajos.FirstOrDefault().Nombre,
+                //                    }).
+                //                    Select(x => new
+                //                    {
+                //                        CodigoDepartamento = x.CodigoDepartamento == null ? 0 : x.CodigoDepartamento,
+                //                        Departamento = x.Departamento1 == null ? "No tiene asignación de departamento" : x.Departamento1,
+                //                        x.EmpleadosSalariosMasBajos,
+                //                        CodigoEmpleadoSalarioMasAlto = x.EmpleadosSalariosMasBajos.FirstOrDefault().CodigoEmpleado,
+                //                        EmpleadoSalarioMasAlto = x.EmpleadosSalariosMasBajos.FirstOrDefault().Nombre,
 
 
-                                    }).ToList();
+                //                    }).ToList();
 
-                foreach (var item in consulta)
-                {
-                    Console.WriteLine(item.Departamento + ": Salario Mas Alto: " + item.CodigoEmpleadoSalarioMasAlto + " - " + item.EmpleadoSalarioMasAlto);
-                    Console.WriteLine("Listado de salarios mas bajos: ");
-                    foreach (var itemSalariosMasBajos in item.EmpleadosSalariosMasBajos)
-                    {
-                        Console.WriteLine(itemSalariosMasBajos.Nombre + "-" + itemSalariosMasBajos.Salario);
-                    }
-                }
+                //foreach (var item in consulta)
+                //{
+                //    Console.WriteLine(item.Departamento + ": Salario Mas Alto: " + item.CodigoEmpleadoSalarioMasAlto + " - " + item.EmpleadoSalarioMasAlto);
+                //    Console.WriteLine("Listado de salarios mas bajos: ");
+                //    foreach (var itemSalariosMasBajos in item.EmpleadosSalariosMasBajos)
+                //    {
+                //        Console.WriteLine(itemSalariosMasBajos.Nombre + "-" + itemSalariosMasBajos.Salario);
+                //    }
+                //}
 
                 #endregion
 
