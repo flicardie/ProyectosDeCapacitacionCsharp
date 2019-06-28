@@ -12,6 +12,21 @@
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,129 +69,168 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACCategory.cs">
+    <Compile Include="Modelo\ACCategory.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ACJob.cs">
+    <Compile Include="Modelo\ACJob.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ARDireccion.cs">
+    <Compile Include="Modelo\ARDireccion.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ARUsuario.cs">
+    <Compile Include="Modelo\ARUsuario.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="CMAppointment.cs">
+    <Compile Include="Modelo\CMAppointment.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="CMCustomer.cs">
+    <Compile Include="Modelo\CMCustomer.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="DCBanco.cs">
+    <Compile Include="Modelo\DCBanco.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="DCCarro.cs">
+    <Compile Include="Modelo\DCCarro.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="Departamento.cs">
+    <Compile Include="Modelo\Departamento.cs">
+      <DependentUpon>ModeloBBDDLocal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\DOTDetail.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="DOTDetail.cs">
+    <Compile Include="Modelo\DOTMaster.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="DOTMaster.cs">
+    <Compile Include="Modelo\ECAPPOINTMENT.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ECAPPOINTMENT.cs">
+    <Compile Include="Modelo\ECCUSTOMER.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ECCUSTOMER.cs">
+    <Compile Include="Modelo\Empleado.cs">
+      <DependentUpon>ModeloBBDDLocal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\EmpleadoDireccion.cs">
+      <DependentUpon>ModeloBBDDLocal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\JATOrden.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="Empleado.cs">
+    <Compile Include="Modelo\JATOrdenDetalle.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmpleadoDireccion.cs">
+    <Compile Include="Modelo\JATProducto.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="JATOrden.cs">
+    <Compile Include="Modelo\JLPCTPay.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="JATOrdenDetalle.cs">
+    <Compile Include="Modelo\JLPCTStudentMaster.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="JATProducto.cs">
-      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    <Compile Include="Modelo\ModeloBBDDLocal.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloBBDDLocal.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="JLPCTPay.cs">
-      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    <Compile Include="Modelo\ModeloBBDDLocal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloBBDDLocal.tt</DependentUpon>
     </Compile>
-    <Compile Include="JLPCTStudentMaster.cs">
-      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    <Compile Include="Modelo\ModeloBBDDLocal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModeloBBDDLocal.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ModelPruebaCurso.Context.cs">
+    <Compile Include="Modelo\ModelPruebaCurso.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelPruebaCurso.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelPruebaCurso.cs">
+    <Compile Include="Modelo\ModelPruebaCurso.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="ModelPruebaCurso.Designer.cs">
+    <Compile Include="Modelo\ModelPruebaCurso.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
     </Compile>
-    <Compile Include="MTTEditorial.cs">
+    <Compile Include="Modelo\MTTEditorial.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="MTTLibro.cs">
+    <Compile Include="Modelo\MTTLibro.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="PCTClaves.cs">
+    <Compile Include="Modelo\PCTClaves.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="PCTMovimiento.cs">
+    <Compile Include="Modelo\PCTMovimiento.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RUTComment.cs">
+    <Compile Include="Modelo\RUTComment.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="RUTUser.cs">
+    <Compile Include="Modelo\RUTUser.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+    <Compile Include="Modelo\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
+    <Compile Include="Modelo\sp_helpdiagrams_Result.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
+    <Compile Include="Modelo\sysdiagrams.cs">
       <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="ModelPruebaCurso.edmx">
+    <EntityDeploy Include="Modelo\ModelPruebaCurso.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelPruebaCurso.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ModelPruebaCurso.edmx.diagram">
+    <EntityDeploy Include="Modelo\ModeloBBDDLocal.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModeloBBDDLocal.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Modelo\ModeloBBDDLocal.edmx.diagram">
+      <DependentUpon>ModeloBBDDLocal.edmx</DependentUpon>
+    </None>
+    <None Include="Modelo\ModelPruebaCurso.edmx.diagram">
       <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ModelPruebaCurso.Context.tt">
+    <Content Include="BBDDLocal.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BBDDLocal_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>BBDDLocal.mdf</DependentUpon>
+    </Content>
+    <Content Include="Modelo\ModeloBBDDLocal.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloBBDDLocal.edmx</DependentUpon>
+      <LastGenOutput>ModeloBBDDLocal.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\ModeloBBDDLocal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModeloBBDDLocal.edmx</DependentUpon>
+      <LastGenOutput>ModeloBBDDLocal.cs</LastGenOutput>
+    </Content>
+    <Content Include="Modelo\ModelPruebaCurso.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
       <LastGenOutput>ModelPruebaCurso.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ModelPruebaCurso.tt">
+    <Content Include="Modelo\ModelPruebaCurso.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
       <LastGenOutput>ModelPruebaCurso.cs</LastGenOutput>
@@ -184,6 +238,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

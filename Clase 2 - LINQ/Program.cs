@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EjemplosClase2.Modelo;
 
 namespace EjemplosClase2
 {
@@ -16,7 +17,7 @@ namespace EjemplosClase2
 
 
                 //1.- definimos nuestro data source
-                dbPruebaCursoEntities db = new dbPruebaCursoEntities();
+                BBDDLocalEntidades db = new BBDDLocalEntidades();
 
                 //se le asigna un valor en segundos, si se le asigna 0 entonces obligamos a EF a esperar indefinidamente la respuesta de SQL
                 db.Database.CommandTimeout = 0;
