@@ -14,12 +14,10 @@ namespace EjemplosClase2
 
             try
             {
-
-
-                //1.- definimos nuestro data source
+                //1.- Instanciamos el contexto de Entity Framework
                 BBDDLocalEntidades db = new BBDDLocalEntidades();
 
-                //se le asigna un valor en segundos, si se le asigna 0 entonces obligamos a EF a esperar indefinidamente la respuesta de SQL
+                //Se le asigna un valor en segundos, si se le asigna 0 entonces obligamos a EF a esperar indefinidamente la respuesta de SQL
                 db.Database.CommandTimeout = 0;
 
                 //Lazy Loading
@@ -28,61 +26,73 @@ namespace EjemplosClase2
 
 
                 #region Consulta con Where
-
-
+                
                 #region Query Syntax
 
-                //var query = from Empleado in db.Empleado
-                //            where Empleado.Salario > 2000M
-                //            select Empleado;
+                var querySyntaxConsultaSimple = (from Empleado in db.Empleado
+                            where Empleado.Salario > 2000M
+                            select Empleado).ToList();
 
+                foreach (var item in querySyntaxConsultaSimple)
+                {
+                    Console.WriteLine(item.Nombre + " - " + item.Salario);
+                }
 
 
                 #endregion
 
                 #region Method Syntax
 
-                //var query = db.Empleado
-                //                .Where(x => x.Salario > 2000M)
-                //                .Select(x => new
-                //                {
-                //                    x.Nombre,
-                //                    x.Salario
-                //                }).ToList();
+                var queryMethodSyntaxConsultaSimple = db.Empleado
+                                .Where(x => x.Salario > 2000M)
+                                .Select(x => new
+                                {
+                                    x.Nombre,
+                                    x.Salario
+                                }).ToList();
+
+                foreach (var item in queryMethodSyntaxConsultaSimple)
+                {
+                    Console.WriteLine(item.Nombre + " - " + item.Salario);
+                }
 
                 #endregion
-
-                //foreach (var item in query)
-                //{
-                //    Console.Write(item.Nombre + " - " + item.Salario);
-                //}
 
                 #endregion
 
                 #region Consulta Join con Where
 
 
+
+
+                #region Query Syntax
+
                 //string departamento = Console.ReadLine();
 
-                //#region Query Syntax
-
-                ////var query = from Empleado in db.Empleado
-                ////            join Departamento in db.Departamento
-                ////            on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
-                ////            where Empleado.Salario > 2000M && Departamento.Departamento1.Contains(departamento)
-                ////            select new
-                ////            {
-                ////                Empleado.Nombre,
-                ////                Empleado.Salario,
-                ////                Departamento =  Departamento.Departamento1
-                ////            };
+                //var querySyntax = (from Empleado in db.Empleado
+                //             join Departamento in db.Departamento
+                //             on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
+                //             where Empleado.Salario > 2000M && Departamento.Departamento1.Contains(departamento)
+                //             select new
+                //             {
+                //                 Empleado.Nombre,
+                //                 Empleado.Salario,
+                //                 Departamento = Departamento.Departamento1
+                //             }).ToList();
 
 
-                //#endregion
+                //foreach (var item in querySyntax)
+                //{
+                //    Console.WriteLine(item.Nombre + " - " + item.Salario + "-" + item.Departamento);
+                //}
 
-                //#region Method Syntax
+                #endregion
 
-                //var query = db.Empleado.Join(db.Departamento
+                #region Method Syntax
+
+                //string departamento = Console.ReadLine();
+
+                //var methodSyntax = db.Empleado.Join(db.Departamento
                 //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
                 //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
                 //    (EmpleadoTP, DepartamentoTF) => new
@@ -94,14 +104,14 @@ namespace EjemplosClase2
                 //    }).Where(x => x.Salario > 2000M && x.Departamento.Contains(departamento)).ToList();
 
 
-
-
-                //#endregion
-
-                //foreach (var item in query)
+                //foreach (var item in methodSyntax)
                 //{
                 //    Console.WriteLine(item.Nombre + " - " + item.Salario + "-" + item.Departamento);
                 //}
+
+                #endregion
+
+
 
                 #endregion
 
