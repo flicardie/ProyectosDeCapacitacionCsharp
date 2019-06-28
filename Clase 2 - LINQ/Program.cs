@@ -28,7 +28,7 @@ namespace EjemplosClase2
 
                 #region Consulta con Where
 
-          
+
                 #region Query Syntax
 
                 //var query = from Empleado in db.Empleado
@@ -60,7 +60,7 @@ namespace EjemplosClase2
 
                 #region Consulta Join con Where
 
-            
+
                 //string departamento = Console.ReadLine();
 
                 //#region Query Syntax
@@ -82,13 +82,13 @@ namespace EjemplosClase2
                 //#region Method Syntax
 
                 //var query = db.Empleado.Join(db.Departamento
-                //    , Empleado => Empleado.CodigoDepartamento
-                //    , Departamento => Departamento.CodigoDepartamento,
-                //    (Empleado, Departamento) => new
+                //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
+                //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
+                //    (EmpleadoTP, DepartamentoTF) => new
                 //    {
-                //        Empleado.Nombre,
-                //        Empleado.Salario,
-                //        Departamento = Departamento.Departamento1
+                //        EmpleadoTP.Nombre,
+                //        EmpleadoTP.Salario,
+                //        Departamento = DepartamentoTF.Departamento1
 
                 //    }).Where(x => x.Salario > 2000M && x.Departamento.Contains(departamento)).ToList();
 
@@ -106,9 +106,31 @@ namespace EjemplosClase2
 
                 #region Consultas Max y Min 
 
+                #region Query Syntax
+
                 //var queryCountSalarioMayor2M = (from Empleado in db.Empleado
-                //             where Empleado.Salario > 2000M
-                //             select Empleado).Count();
+                //                                where Empleado.Salario > 2000M
+                //                                select Empleado).Count();
+
+                //var queryTotalEmpleados = (from Empleado in db.Empleado select Empleado).Count();
+
+                //var queryCountSalarioMenor5M = (from Empleado in db.Empleado where Empleado.Salario < 5000 select Empleado).Count();
+
+                //decimal? querySalarioMaximo = (from Empleado in db.Empleado select Empleado.Salario).Max();
+
+                //var queryPersonaSalarioMaximo = (from Empleado in db.Empleado
+                //                                 orderby Empleado.Salario descending
+                //                                 select Empleado).FirstOrDefault();
+
+                //var queryPersonaSalarioMinimo = (from Empleado in db.Empleado
+                //                                where Empleado.Salario == db.Empleado.Min(w => w.Salario)
+                //                                select Empleado).FirstOrDefault();
+
+                #endregion
+
+                #region Method Syntax
+
+                //var queryCountSalarioMayor2M = db.Empleado.Where(x => x.Salario > 2000M).Count();
 
                 //var queryTotalEmpleados = db.Empleado.Count();
 
@@ -116,26 +138,28 @@ namespace EjemplosClase2
 
                 //decimal? querySalarioMaximo = db.Empleado.Max(w => w.Salario);
 
-                //var queryPersonaSalarioMaximo = (from Empleado in db.Empleado
-                //                                 orderby Empleado.Salario descending
-                //                                 select Empleado).First();
-                //var queryPersonaSalarioMinimo = from Empleado in db.Empleado
-                //                                where Empleado.Salario == db.Empleado.Min(w => w.Salario)
-                //                                select Empleado;
+                //var queryPersonaSalarioMaximo = db.Empleado.OrderByDescending(x => x.Salario).FirstOrDefault();
+
+                //var queryPersonaSalarioMinimo = db.Empleado.OrderBy(x => x.Salario).FirstOrDefault();
 
 
 
-                //Console.WriteLine( "Personas con salario mayor a Q2000 = " + queryCountSalarioMayor2M);
+
+                #endregion
+
+                //Console.WriteLine("Personas con salario mayor a Q2000 = " + queryCountSalarioMayor2M);
                 //Console.WriteLine("Número de Empleados = " + queryTotalEmpleados);
                 //Console.WriteLine("Personas con salario menor  a Q5000 = " + queryCountSalarioMenor5M);
                 //Console.WriteLine("Salario maximo = " + querySalarioMaximo);
                 //Console.WriteLine("Persona con Salario Máximo: " + queryPersonaSalarioMaximo.Nombre);
-                //Console.WriteLine("Persona con Salario Mínimo: " + queryPersonaSalarioMinimo.First().Nombre);
+                //Console.WriteLine("Persona con Salario Mínimo: " + queryPersonaSalarioMinimo.Nombre);
 
 
                 #endregion
 
                 #region Consulta Promedio Salarial por Departamento
+
+                #region Query Syntax
 
                 //var queryPromedioSalarioPorDepartamento = (from Empleado in db.Empleado
                 //                                           join Departamento in db.Departamento
@@ -147,31 +171,88 @@ namespace EjemplosClase2
                 //                                               CodigoDepartamento = agrupacion.Key.CodigoDepartamento,
                 //                                               agrupacion.Key.Departamento1,
                 //                                               Promedio = agrupacion.Average(w => w.Salario)
-                //                                           });
+                //                                           }).ToList();
+
+                #endregion
+
+                #region Method Syntax
+
+                //var queryPromedioSalarioPorDepartamento = db.Empleado.Join(db.Departamento
+                //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
+                //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
+                //    (EmpleadoTP, DepartamentoTF) => new
+                //    {
+                //        Empleado = EmpleadoTP,
+                //        Departamento = DepartamentoTF
+
+                //    }).ToList()
+                //    .GroupBy(x => x.Departamento)
+                //    .Select(x => new
+                //    {
+                //        x.Key.CodigoDepartamento,
+                //        x.Key.Departamento1,
+                //        Promedio = x.Average(y => y.Empleado.Salario)
+
+                //    }).ToList();
+
+
+
+                #endregion
 
 
                 //foreach (var item in queryPromedioSalarioPorDepartamento)
                 //{
-                //    Console.WriteLine( item.Departamento1 + " = " + item.Promedio);
+                //    Console.WriteLine(item.Departamento1 + " = " + item.Promedio);
                 //}
 
                 #endregion
 
                 #region Consulta Total Empleado Por Departamento
+
+
+                #region Query Syntax
+
                 //string departamento = Console.ReadLine();
 
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
-                //                                           join Departamento in db.Departamento
-                //                                           on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
+                //                                    join Departamento in db.Departamento
+                //                                    on Empleado.CodigoDepartamento equals Departamento.CodigoDepartamento
 
-                //                                           group Empleado by Departamento into agrupacion
-                //                                           where agrupacion.Key.Departamento1.Contains(departamento)
-                //                                           select new
-                //                                           {
-                //                                               CodigoDepartamento = agrupacion.Key.CodigoDepartamento,
-                //                                               agrupacion.Key.Departamento1,
-                //                                               NoEmpleados = agrupacion.Count()
-                //                                           });
+                //                                    group Empleado by Departamento into agrupacion
+                //                                    where agrupacion.Key.Departamento1.Contains(departamento)
+                //                                    select new
+                //                                    {
+                //                                        CodigoDepartamento = agrupacion.Key.CodigoDepartamento,
+                //                                        agrupacion.Key.Departamento1,
+                //                                        NoEmpleados = agrupacion.Count()
+                //                                    }).ToList();
+
+                #endregion
+
+                #region Method Syntax
+
+                //string departamento = Console.ReadLine();
+
+                //var queryEmpleadoPorDepartamento = db.Empleado.Join(db.Departamento
+                //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
+                //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
+                //    (EmpleadoTP, DepartamentoTF) => new
+                //    {
+                //        Empleado = EmpleadoTP,
+                //        Departamento = DepartamentoTF
+
+                //    })
+                //    .Where(x => x.Departamento.Departamento1.Contains(departamento) )
+                //    .GroupBy(x => x.Departamento)
+                //    .Select(x => new
+                //    {
+                //        x.Key.CodigoDepartamento,
+                //        x.Key.Departamento1,
+                //        NoEmpleados = x.Count()
+
+                //    }).ToList();
+
+                #endregion
 
                 //foreach (var item in queryEmpleadoPorDepartamento)
                 //{
@@ -182,20 +263,33 @@ namespace EjemplosClase2
 
                 #region Consulta Order By 
 
+                #region Query Syntax
 
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
                 //                                    orderby Empleado.Salario //descending
                 //                                    select Empleado
-                //                                   );
+                //                                   ).ToList();
+
+                #endregion
+
+                #region Method Syntax
+
+                //var queryEmpleadoPorDepartamento = db.Empleado.OrderBy(x => x.Salario).Select(x => x);
+
+                #endregion
 
                 //foreach (var item in queryEmpleadoPorDepartamento)
                 //{
                 //    Console.WriteLine(item.Nombre + " = " + item.Salario);
                 //}
 
+
                 #endregion
 
                 #region Consulta Take - Skip
+
+                #region Query Syntax
+
                 //string departamento = Console.ReadLine();
 
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
@@ -204,7 +298,32 @@ namespace EjemplosClase2
                 //                                    where Departamento.Departamento1.Contains(departamento)
                 //                                    orderby Empleado.Salario descending
                 //                                    select Empleado
-                //                                   ).Take(4);
+                //                                   ).Take(4).ToList();
+
+                #endregion
+
+                #region Method Syntax
+
+                //string departamento = Console.ReadLine();
+
+                //var queryEmpleadoPorDepartamento = db.Empleado.Join(db.Departamento
+                //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
+                //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
+                //    (EmpleadoTP, DepartamentoTF) => new
+                //    {
+                //        Empleado = EmpleadoTP,
+                //        Departamento = DepartamentoTF
+
+                //    })
+                //    .Where(x => x.Departamento.Departamento1.Contains(departamento))
+
+                //    .Select(x => x.Empleado)
+                //    .Take(4)
+                //    .ToList();
+
+
+                #endregion
+
 
                 //foreach (var item in queryEmpleadoPorDepartamento)
                 //{
@@ -228,9 +347,21 @@ namespace EjemplosClase2
 
                 #region Consulta con FirstOrDefault
 
+                #region Query Syntax
+
                 //var queryPersonaSalarioMax = (from Empleado in db.Empleado
                 //                                where Empleado.Salario == db.Empleado.Max(w => w.Salario)
                 //                                select Empleado).FirstOrDefault();
+
+                #endregion
+
+                #region Method Syntax
+
+                //var queryPersonaSalarioMax = db.Empleado.Where(x => x.Salario == db.Empleado.Max(w => w.Salario)).FirstOrDefault();
+
+                #endregion
+
+
 
                 //if (queryPersonaSalarioMax != null)
                 //    Console.WriteLine(queryPersonaSalarioMax.Nombre + " - " + queryPersonaSalarioMax.Salario);
@@ -239,6 +370,8 @@ namespace EjemplosClase2
 
 
                 #region Consulta con Element At
+
+                #region Query Syntax
                 //string departamento = Console.ReadLine();
 
                 //var query = (from Empleado in db.Empleado
@@ -254,6 +387,35 @@ namespace EjemplosClase2
                 //                Empleado.Salario
                 //            }).ToList().ElementAtOrDefault(2);
 
+                #endregion
+
+                #region Method Syntax
+
+                //string departamento = Console.ReadLine();
+
+                //var query = db.Empleado.Join(db.Departamento
+                //    , EmpleadoTP => EmpleadoTP.CodigoDepartamento
+                //    , DepartamentoTF => DepartamentoTF.CodigoDepartamento,
+                //    (EmpleadoTP, DepartamentoTF) => new
+                //    {
+                //        Empleado = EmpleadoTP,
+                //        Departamento = DepartamentoTF
+
+                //    })
+                //    .Where(x => x.Departamento.Departamento1.Contains(departamento))
+
+                //    .Select(x => new
+                //    {
+                //        x.Departamento.CodigoDepartamento,
+                //        x.Departamento.Departamento1,
+                //        x.Empleado.Nombre,
+                //        x.Empleado.Salario
+                //    })
+                //    .ToList().ElementAtOrDefault(2);
+
+
+                #endregion
+
                 //if (query!=null)
                 //{
 
@@ -265,6 +427,8 @@ namespace EjemplosClase2
                 #endregion
 
                 #region Uso de All and ANY
+
+                #region Query and Methos Syntax
 
                 // var query = (from Empleado in db.Empleado
                 //              select Empleado).ToList().All(w => w.Salario > 3000);
@@ -280,7 +444,12 @@ namespace EjemplosClase2
 
                 #endregion
 
+
+                #endregion
+
                 #region Consulta por lista de código de Empleado
+
+
                 //List<int> listadoDeEmpleados = new List<int>{ 1, 4, 6, 8, 9 };
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
                 //                                    where listadoDeEmpleados.Contains(Empleado.CodigoEmpleado)
@@ -293,6 +462,8 @@ namespace EjemplosClase2
                 //}
                 #endregion
                 #region Consulta para obtener IGSS
+
+                // Uso del comando LET
 
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
                 //                                    let IGSS = Empleado.Salario * 0.0483M
@@ -312,6 +483,8 @@ namespace EjemplosClase2
                 #endregion
 
                 #region Consulta para Empleados sin departamento 
+
+                // Para hacer LEFT JOIN es más fácil con Query Syntax
 
                 //var queryEmpleadoPorDepartamento = (from Empleado in db.Empleado
                 //                                    join D in db.Departamento
@@ -334,6 +507,8 @@ namespace EjemplosClase2
 
 
                 #region Consulta Compleja
+
+
 
                 //var consulta = db.Empleado
                 //                    .GroupBy(x => new
