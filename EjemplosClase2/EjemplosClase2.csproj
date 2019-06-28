@@ -1,0 +1,196 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7BEE5DCF-3B4A-4A6C-8ACD-AF4302FE7B4D}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EjemplosClase2</RootNamespace>
+    <AssemblyName>EjemplosClase2</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ACCategory.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ACJob.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ARDireccion.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ARUsuario.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMAppointment.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CMCustomer.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DCBanco.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DCCarro.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Departamento.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOTDetail.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DOTMaster.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ECAPPOINTMENT.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ECCUSTOMER.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Empleado.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpleadoDireccion.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JATOrden.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JATOrdenDetalle.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JATProducto.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JLPCTPay.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JLPCTStudentMaster.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPruebaCurso.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPruebaCurso.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPruebaCurso.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelPruebaCurso.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MTTEditorial.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MTTLibro.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PCTClaves.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PCTMovimiento.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RUTComment.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RUTUser.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>ModelPruebaCurso.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="ModelPruebaCurso.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelPruebaCurso.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelPruebaCurso.edmx.diagram">
+      <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ModelPruebaCurso.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
+      <LastGenOutput>ModelPruebaCurso.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ModelPruebaCurso.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelPruebaCurso.edmx</DependentUpon>
+      <LastGenOutput>ModelPruebaCurso.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
