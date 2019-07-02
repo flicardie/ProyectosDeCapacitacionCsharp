@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EjemplosClase2.Modelo;
+using System.Data.Entity;
 
 namespace EjemplosClase2
 {
@@ -24,39 +25,102 @@ namespace EjemplosClase2
                 db.Configuration.LazyLoadingEnabled = false;
                 db.Configuration.ProxyCreationEnabled = false;
 
+                #region Beneficios en general de LINQ
+                
+                #region Combinación de cadenas con y sin LINQ
+
+                // Si quisieramos combinar todas estas cadenas en una sala sin LINQ hariamos lo siguiente
+
+                string[] paises = { "India", "US", "UK", "Canada", "Australia" };
+
+                #region Sin LINQ Unión de cadenas
+
+                //string resultadoSinLINQ = string.Empty;
+                //for (int i = 0; i < paises.Length; i++)
+                //{
+                //    resultadoSinLINQ = resultadoSinLINQ + paises[i] + ", ";
+                //}
+
+                //int lastIndexSinLINQ = resultadoSinLINQ.LastIndexOf(",");
+                //resultadoSinLINQ = resultadoSinLINQ.Remove(lastIndexSinLINQ);
+
+                //Console.WriteLine(resultadoSinLINQ);
+
+                #endregion
+
+                #region Con LINQ
+
+                // Si quisieramos combinar todas estas cadenas en una sala sin LINQ hariamos lo siguiente
+
+                //string result = paises.Aggregate((a, b) => a + ", " + b);
+
+                #endregion
+
+                #endregion
+
+                #region Multiplicación de todos los números con y sin LINQ
+
+                // Si quisieramos multiplicar todos estos números
+
+                int[] Numbers = { 2, 3, 4, 5 };
+
+                #region Sin LINQ 
+
+                int result = 1;
+                foreach (int i in Numbers)
+                {
+                    result = result * i;
+                }
+
+                Console.WriteLine(result);
+
+                #endregion
+
+                #region Con LINQ
+
+                int resultado = Numbers.Aggregate((a, b) => a * b);
+
+                Console.WriteLine(resultado);
+
+                #endregion
+
+                #endregion
+
+
+                #endregion
 
                 #region Consulta con Where
-                
-                #region Query Syntax
 
-                var querySyntaxConsultaSimple = (from Empleado in db.Empleado
-                            where Empleado.Salario > 2000M
-                            select Empleado).ToList();
+                //#region Query Syntax
 
-                foreach (var item in querySyntaxConsultaSimple)
-                {
-                    Console.WriteLine(item.Nombre + " - " + item.Salario);
-                }
+                //var querySyntaxConsultaSimple = (from Empleado in db.Empleado
+                //            where Empleado.Salario > 2000M
+                //            select Empleado).ToList();
+
+                //foreach (var item in querySyntaxConsultaSimple)
+                //{
+                //    Console.WriteLine(item.Nombre + " - " + item.Salario);
+                //}
 
 
-                #endregion
+                //#endregion
 
-                #region Method Syntax
+                //#region Method Syntax
 
-                var queryMethodSyntaxConsultaSimple = db.Empleado
-                                .Where(x => x.Salario > 2000M)
-                                .Select(x => new
-                                {
-                                    x.Nombre,
-                                    x.Salario
-                                }).ToList();
+                //var queryMethodSyntaxConsultaSimple = db.Empleado
+                //                .Where(x => x.Salario > 2000M)
+                //                .Select(x => new
+                //                {
+                //                    x.Nombre,
+                //                    x.Salario
+                //                }).ToList();
 
-                foreach (var item in queryMethodSyntaxConsultaSimple)
-                {
-                    Console.WriteLine(item.Nombre + " - " + item.Salario);
-                }
+                //foreach (var item in queryMethodSyntaxConsultaSimple)
+                //{
+                //    Console.WriteLine(item.Nombre + " - " + item.Salario);
+                //}
 
-                #endregion
+                //#endregion
 
                 #endregion
 
@@ -516,6 +580,83 @@ namespace EjemplosClase2
                 //}
                 #endregion
 
+                #region Trabajando con Fechas
+
+
+
+                // En LINQ to Entity, no podemos utilizar los métodos disponibles para el trabajo con fechas, por ejemplo lo siguiente da error, en LINQ to Objects no tendriamos ese problema
+
+                //var query = db.Empleado.
+                //    Select(x => new
+                //    {
+
+                //        Empleado = x.Nombre,
+                //        Fecha = x.Fecha,
+                //        FechaRestando5Dias = x.Fecha.Value.AddDays(-5).Date,
+                //        AñoAgregado = x.Fecha.Value.AddYears(10)
+                //    }).ToList();
+
+
+
+                /* Para ello, disponemos de la clase DbFunctions, que nos permite realizar lo anterior sin errores
+                 * Ejemplo https://hernandgr.wordpress.com/2015/07/21/tip-clase-dbfunctions-usando-funciones-canonicas-linq-to-entities-en-c-sharp/
+                 */
+
+                var queryConDbFunctions = db.Empleado.
+                 Select(x => new
+                 {
+                     Empleado = x.Nombre,
+                     Fecha = x.Fecha,
+                     FechaRestando5Dias = DbFunctions.AddDays(x.Fecha.Value, -5),
+                     AñoAgregado = DbFunctions.AddYears(x.Fecha, 10).Value
+
+                 }).ToList();
+
+                #endregion
+
+                #region Ejemplo uso de LIKE
+
+                /* Se pueden serguir los siguientes enlaces como apoyo
+                 * https://www.cjorellana.net/2012/06/like-en-entity-framework.html
+                 */
+
+                var ejemploCadenaLike = "ar";
+
+                
+                /* Todos los empleados que contienen la cadena ar
+                 * SELECT * FROM Empleado WHERE Nombre like '%ar%'
+                 */
+
+                var matchesEjemplo1 = (from m in db.Empleado
+                                       where m.Nombre.Contains(ejemploCadenaLike)
+                                       select m).ToList();
+
+                /* Todos los empleados que empiezan con la cadena ar
+                 * SELECT * FROM Empleado WHERE Nombre like '%ar'
+                 */
+
+                var matchesEjemplo2 = (from m in db.Empleado
+                                       where m.Nombre.ToLower().StartsWith(ejemploCadenaLike)
+                                       select m).ToList();
+
+                /* Todos los empleados que finalizan con la cadena
+                 * SELECT * FROM Empleado WHERE Nombre like 'ar%'
+                 */
+
+                var matchesEjemplo3 = (from m in db.Empleado
+                                       where m.Nombre.ToLower().EndsWith(ejemploCadenaLike)
+                                       select m).ToList();
+
+                /* Todos los empleados que empiezan con la letra t y finalizan con la letra s
+                 * SELECT * FROM Empleado WHERE Nombre like 't%s'
+                 */
+
+                var matchesEjemplo4 = (from m in db.Empleado
+                                       where m.Nombre.ToLower().StartsWith("t") && m.Nombre.ToLower().EndsWith("s")
+                                       select m).ToList();
+
+
+                #endregion
 
                 #region Consulta Compleja
 

@@ -24,6 +24,7 @@ namespace EjemplosClase2.Modelo
         public string Nombre { get; set; }
         public Nullable<decimal> Salario { get; set; }
         public Nullable<int> CodigoDepartamento { get; set; }
+        public Nullable<System.DateTime> Fecha { get; set; }
     
         public virtual Departamento Departamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
