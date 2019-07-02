@@ -102,6 +102,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloBBDDLocal.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Archivos de apoyo\Datos de tarea LINQ.xlsx" />
     <None Include="Modelo\ModeloBBDDLocal.edmx.diagram">
       <DependentUpon>ModeloBBDDLocal.edmx</DependentUpon>
     </None>
