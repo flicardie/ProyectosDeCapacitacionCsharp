@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase 2 - LINQ", "Clase 2 -
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase 3 - EF Manejo de información", "Clase 3 - EF Manejo de información\Clase 3 - EF Manejo de información.csproj", "{517F4408-D88E-4342-B9DB-D8F2040E4632}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clase 4 - WebApi", "Clase 4 - Web Api\WebApiCurso\Clase 4 - WebApi.csproj", "{A6F7B295-4830-4BEE-A76A-1A47EF988A6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{517F4408-D88E-4342-B9DB-D8F2040E4632}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{517F4408-D88E-4342-B9DB-D8F2040E4632}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{517F4408-D88E-4342-B9DB-D8F2040E4632}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6F7B295-4830-4BEE-A76A-1A47EF988A6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6F7B295-4830-4BEE-A76A-1A47EF988A6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6F7B295-4830-4BEE-A76A-1A47EF988A6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6F7B295-4830-4BEE-A76A-1A47EF988A6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BBDDLocalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="CodigoDepartamento" />
+          </Key>
+          <Property Name="CodigoDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoDepartamento" Type="int" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="EmpleadoDireccion">
+          <Key>
+            <PropertyRef Name="CodigoEmpleadoDireccion" />
+          </Key>
+          <Property Name="CodigoEmpleadoDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="int" />
+        </EntityType>
+        <Association Name="FK_Empleado_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BBDDLocalModelStoreContainer">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpleadoDireccion" EntityType="Self.EmpleadoDireccion" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Empleado_Departamento" Association="Self.FK_Empleado_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_Empleado" Association="Self.FK_EmpleadoDireccion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BBDDLocalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="CodigoDepartamento" />
+          </Key>
+          <Property Name="CodigoDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Departamento1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Departamento" FromRole="Departamento" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoDepartamento" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Empleado_Departamento" FromRole="Empleado" ToRole="Departamento" />
+          <NavigationProperty Name="EmpleadoDireccion" Relationship="Self.FK_EmpleadoDireccion_Empleado" FromRole="Empleado" ToRole="EmpleadoDireccion" />
+        </EntityType>
+        <EntityType Name="EmpleadoDireccion">
+          <Key>
+            <PropertyRef Name="CodigoEmpleadoDireccion" />
+          </Key>
+          <Property Name="CodigoEmpleadoDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoDireccion_Empleado" FromRole="EmpleadoDireccion" ToRole="Empleado" />
+        </EntityType>
+        <Association Name="FK_Empleado_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BBDDLocalEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="EmpleadoDireccion" EntityType="Self.EmpleadoDireccion" />
+          <AssociationSet Name="FK_Empleado_Departamento" Association="Self.FK_Empleado_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_Empleado" Association="Self.FK_EmpleadoDireccion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BBDDLocalModelStoreContainer" CdmEntityContainer="BBDDLocalEntities">
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="BBDDLocalModel.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Departamento1" ColumnName="Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="BBDDLocalModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadoDireccion">
+            <EntityTypeMapping TypeName="BBDDLocalModel.EmpleadoDireccion">
+              <MappingFragment StoreEntitySet="EmpleadoDireccion">
+                <ScalarProperty Name="CodigoEmpleadoDireccion" ColumnName="CodigoEmpleadoDireccion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
