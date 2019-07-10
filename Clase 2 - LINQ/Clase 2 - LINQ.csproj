@@ -97,7 +97,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <EntityDeploy Include="Modelo\ModeloBBDDLocal.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModeloBBDDLocal.Designer.cs</LastGenOutput>
@@ -109,12 +111,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="BBDDLocal.mdf">
+    <Content Include="BBDDLocalClase2.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BBDDLocal_log.ldf">
+    <Content Include="BBDDLocalClase2_log.ldf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>BBDDLocal.mdf</DependentUpon>
+      <DependentUpon>BBDDLocalClase2.mdf</DependentUpon>
     </Content>
     <Content Include="Modelo\ModeloBBDDLocal.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BBDDLocalClase3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="CodigoDepartamento" />
+          </Key>
+          <Property Name="CodigoDepartamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Departamento" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Depto">
+          <Key>
+            <PropertyRef Name="CodigoDepto" />
+          </Key>
+          <Property Name="CodigoDepto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CodigoPais" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoDepartamento" Type="int" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="EmpleadoDireccion">
+          <Key>
+            <PropertyRef Name="CodigoEmpleadoDireccion" />
+          </Key>
+          <Property Name="CodigoEmpleadoDireccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="int" />
+          <Property Name="CodigoMunicipio" Type="int" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="CodigoMunicipio" />
+          </Key>
+          <Property Name="CodigoMunicipio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CodigoDepto" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="CodigoPais" />
+          </Key>
+          <Property Name="CodigoPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Depto_ToPais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Depto" Type="Self.Depto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Depto">
+              <PropertyRef Name="CodigoPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_ToMunicipio">
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipio">
+              <PropertyRef Name="CodigoMunicipio" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Municipio_ToDepto">
+          <End Role="Depto" Type="Self.Depto" Multiplicity="1" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depto">
+              <PropertyRef Name="CodigoDepto" />
+            </Principal>
+            <Dependent Role="Municipio">
+              <PropertyRef Name="CodigoDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="FEmpleadoDepartamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodigoEmpleado" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="CodigoEmpleado" Type="int" />
+                <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+                <Property Name="CodigoDepartamento" Type="int" />
+                <Property Name="Departamento" Type="nvarchar" MaxLength="255" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="PPaisDeptoMunicipioListar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodigoPais" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="BBDDLocalClase3ModelStoreContainer">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Depto" EntityType="Self.Depto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmpleadoDireccion" EntityType="Self.EmpleadoDireccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Municipio" EntityType="Self.Municipio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Depto_ToPais" Association="Self.FK_Depto_ToPais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Depto" EntitySet="Depto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Departamento" Association="Self.FK_Empleado_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_Empleado" Association="Self.FK_EmpleadoDireccion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_ToMunicipio" Association="Self.FK_EmpleadoDireccion_ToMunicipio">
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Municipio_ToDepto" Association="Self.FK_Municipio_ToDepto">
+            <End Role="Depto" EntitySet="Depto" />
+            <End Role="Municipio" EntitySet="Municipio" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BBDDLocalClase3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="FEmpleadoDepartamento_Result">
+          <Property Name="CodigoEmpleado" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CodigoDepartamento" Type="Int32" />
+          <Property Name="Departamento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </ComplexType>
+        <EntityType Name="Departamento">
+          <Key>
+            <PropertyRef Name="CodigoDepartamento" />
+          </Key>
+          <Property Name="CodigoDepartamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Departamento1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Departamento" FromRole="Departamento" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Depto">
+          <Key>
+            <PropertyRef Name="CodigoDepto" />
+          </Key>
+          <Property Name="CodigoDepto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoPais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Pais" Relationship="Self.FK_Depto_ToPais" FromRole="Depto" ToRole="Pais" />
+          <NavigationProperty Name="Municipio" Relationship="Self.FK_Municipio_ToDepto" FromRole="Depto" ToRole="Municipio" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="CodigoEmpleado" />
+          </Key>
+          <Property Name="CodigoEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CodigoDepartamento" Type="Int32" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Departamento" Relationship="Self.FK_Empleado_Departamento" FromRole="Empleado" ToRole="Departamento" />
+          <NavigationProperty Name="EmpleadoDireccion" Relationship="Self.FK_EmpleadoDireccion_Empleado" FromRole="Empleado" ToRole="EmpleadoDireccion" />
+        </EntityType>
+        <EntityType Name="EmpleadoDireccion">
+          <Key>
+            <PropertyRef Name="CodigoEmpleadoDireccion" />
+          </Key>
+          <Property Name="CodigoEmpleadoDireccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoEmpleado" Type="Int32" />
+          <Property Name="CodigoMunicipio" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_EmpleadoDireccion_Empleado" FromRole="EmpleadoDireccion" ToRole="Empleado" />
+          <NavigationProperty Name="Municipio" Relationship="Self.FK_EmpleadoDireccion_ToMunicipio" FromRole="EmpleadoDireccion" ToRole="Municipio" />
+        </EntityType>
+        <EntityType Name="Municipio">
+          <Key>
+            <PropertyRef Name="CodigoMunicipio" />
+          </Key>
+          <Property Name="CodigoMunicipio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CodigoDepto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depto" Relationship="Self.FK_Municipio_ToDepto" FromRole="Municipio" ToRole="Depto" />
+          <NavigationProperty Name="EmpleadoDireccion" Relationship="Self.FK_EmpleadoDireccion_ToMunicipio" FromRole="Municipio" ToRole="EmpleadoDireccion" />
+        </EntityType>
+        <EntityType Name="Pais">
+          <Key>
+            <PropertyRef Name="CodigoPais" />
+          </Key>
+          <Property Name="CodigoPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Depto" Relationship="Self.FK_Depto_ToPais" FromRole="Pais" ToRole="Depto" />
+        </EntityType>
+        <Association Name="FK_Empleado_Departamento">
+          <End Role="Departamento" Type="Self.Departamento" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departamento">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="CodigoDepartamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Depto_ToPais">
+          <End Role="Pais" Type="Self.Pais" Multiplicity="1" />
+          <End Role="Depto" Type="Self.Depto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pais">
+              <PropertyRef Name="CodigoPais" />
+            </Principal>
+            <Dependent Role="Depto">
+              <PropertyRef Name="CodigoPais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Municipio_ToDepto">
+          <End Role="Depto" Type="Self.Depto" Multiplicity="1" />
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depto">
+              <PropertyRef Name="CodigoDepto" />
+            </Principal>
+            <Dependent Role="Municipio">
+              <PropertyRef Name="CodigoDepto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EmpleadoDireccion_ToMunicipio">
+          <End Role="Municipio" Type="Self.Municipio" Multiplicity="0..1" />
+          <End Role="EmpleadoDireccion" Type="Self.EmpleadoDireccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Municipio">
+              <PropertyRef Name="CodigoMunicipio" />
+            </Principal>
+            <Dependent Role="EmpleadoDireccion">
+              <PropertyRef Name="CodigoMunicipio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BBDDLocalClase3Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departamento" EntityType="Self.Departamento" />
+          <EntitySet Name="Depto" EntityType="Self.Depto" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="EmpleadoDireccion" EntityType="Self.EmpleadoDireccion" />
+          <EntitySet Name="Municipio" EntityType="Self.Municipio" />
+          <EntitySet Name="Pais" EntityType="Self.Pais" />
+          <AssociationSet Name="FK_Empleado_Departamento" Association="Self.FK_Empleado_Departamento">
+            <End Role="Departamento" EntitySet="Departamento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Depto_ToPais" Association="Self.FK_Depto_ToPais">
+            <End Role="Pais" EntitySet="Pais" />
+            <End Role="Depto" EntitySet="Depto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Municipio_ToDepto" Association="Self.FK_Municipio_ToDepto">
+            <End Role="Depto" EntitySet="Depto" />
+            <End Role="Municipio" EntitySet="Municipio" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_Empleado" Association="Self.FK_EmpleadoDireccion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EmpleadoDireccion_ToMunicipio" Association="Self.FK_EmpleadoDireccion_ToMunicipio">
+            <End Role="Municipio" EntitySet="Municipio" />
+            <End Role="EmpleadoDireccion" EntitySet="EmpleadoDireccion" />
+          </AssociationSet>
+          <FunctionImport Name="FEmpleadoDepartamento" IsComposable="true" ReturnType="Collection(BBDDLocalClase3Model.FEmpleadoDepartamento_Result)">
+            <Parameter Name="CodigoEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="PPaisDeptoMunicipioListar" ReturnType="Collection(BBDDLocalClase3Model.PPaisDeptoMunicipioListar_Result)">
+            <Parameter Name="CodigoPais" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="PPaisDeptoMunicipioListar_Result">
+          <Property Type="Int32" Name="CodigoPais" Nullable="false" />
+          <Property Type="String" Name="DescPais" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CodigoDepto" Nullable="false" />
+          <Property Type="String" Name="DescDepto" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="CodigoMunicipio" Nullable="false" />
+          <Property Type="String" Name="DescMunicipio" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BBDDLocalClase3ModelStoreContainer" CdmEntityContainer="BBDDLocalClase3Entities">
+          <EntitySetMapping Name="Departamento">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.Departamento">
+              <MappingFragment StoreEntitySet="Departamento">
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Departamento1" ColumnName="Departamento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Depto">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.Depto">
+              <MappingFragment StoreEntitySet="Depto">
+                <ScalarProperty Name="CodigoDepto" ColumnName="CodigoDepto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmpleadoDireccion">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.EmpleadoDireccion">
+              <MappingFragment StoreEntitySet="EmpleadoDireccion">
+                <ScalarProperty Name="CodigoEmpleadoDireccion" ColumnName="CodigoEmpleadoDireccion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="CodigoMunicipio" ColumnName="CodigoMunicipio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Municipio">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.Municipio">
+              <MappingFragment StoreEntitySet="Municipio">
+                <ScalarProperty Name="CodigoMunicipio" ColumnName="CodigoMunicipio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="CodigoDepto" ColumnName="CodigoDepto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pais">
+            <EntityTypeMapping TypeName="BBDDLocalClase3Model.Pais">
+              <MappingFragment StoreEntitySet="Pais">
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="BBDDLocalClase3Model.Store.FEmpleadoDepartamento" FunctionImportName="FEmpleadoDepartamento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBDDLocalClase3Model.FEmpleadoDepartamento_Result">
+                <ScalarProperty Name="CodigoEmpleado" ColumnName="CodigoEmpleado" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CodigoDepartamento" ColumnName="CodigoDepartamento" />
+                <ScalarProperty Name="Departamento" ColumnName="Departamento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PPaisDeptoMunicipioListar" FunctionName="BBDDLocalClase3Model.Store.PPaisDeptoMunicipioListar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BBDDLocalClase3Model.PPaisDeptoMunicipioListar_Result">
+                <ScalarProperty Name="CodigoPais" ColumnName="CodigoPais" />
+                <ScalarProperty Name="DescPais" ColumnName="DescPais" />
+                <ScalarProperty Name="CodigoDepto" ColumnName="CodigoDepto" />
+                <ScalarProperty Name="DescDepto" ColumnName="DescDepto" />
+                <ScalarProperty Name="CodigoMunicipio" ColumnName="CodigoMunicipio" />
+                <ScalarProperty Name="DescMunicipio" ColumnName="DescMunicipio" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

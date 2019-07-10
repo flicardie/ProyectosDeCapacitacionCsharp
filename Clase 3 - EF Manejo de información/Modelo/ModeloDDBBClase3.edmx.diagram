@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="57f2e711e5944bdab16aea42a8b3c31a" Name="Diagram1">
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.Departamento" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.Depto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.Empleado" Width="1.5" PointX="5.25" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.EmpleadoDireccion" Width="1.5" PointX="7.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.Municipio" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BBDDLocalClase3Model.Pais" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="BBDDLocalClase3Model.FK_Empleado_Departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="BBDDLocalClase3Model.FK_Depto_ToPais" ManuallyRouted="false" />
+        <AssociationConnector Association="BBDDLocalClase3Model.FK_Municipio_ToDepto" ManuallyRouted="false" />
+        <AssociationConnector Association="BBDDLocalClase3Model.FK_EmpleadoDireccion_Empleado" ManuallyRouted="false" />
+        <AssociationConnector Association="BBDDLocalClase3Model.FK_EmpleadoDireccion_ToMunicipio" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
