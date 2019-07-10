@@ -17,7 +17,9 @@ namespace WebApiCurso.Models
         public int CodigoEmpleadoDireccion { get; set; }
         public string Direccion { get; set; }
         public Nullable<int> CodigoEmpleado { get; set; }
+        public Nullable<int> CodigoMunicipio { get; set; }
     
         public virtual Empleado Empleado { get; set; }
+        public virtual Municipio Municipio { get; set; }
     }
 }

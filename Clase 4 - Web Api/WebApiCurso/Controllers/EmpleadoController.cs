@@ -9,11 +9,11 @@ namespace WebApiCurso.Controllers
 {
     public class EmpleadoController : ApiController
     {
-        BBDDLocalEntities db;
+        BBDDLocalClase4Entities  db;
 
         public EmpleadoController()
         {
-            db = new BBDDLocalEntities();
+            db = new BBDDLocalClase4Entities();
         }
         
         

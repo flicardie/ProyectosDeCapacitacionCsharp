@@ -198,51 +198,63 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Departamento.cs">
-      <DependentUpon>ModelCursoPrueba.tt</DependentUpon>
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Depto.cs">
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Empleado.cs">
-      <DependentUpon>ModelCursoPrueba.tt</DependentUpon>
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmpleadoDireccion.cs">
-      <DependentUpon>ModelCursoPrueba.tt</DependentUpon>
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelCursoPrueba.Context.cs">
+    <Compile Include="Models\FEmpleadoDepartamento_Result.cs">
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ModeloClase4.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCursoPrueba.Context.tt</DependentUpon>
+      <DependentUpon>ModeloClase4.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelCursoPrueba.cs">
+    <Compile Include="Models\ModeloClase4.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCursoPrueba.tt</DependentUpon>
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelCursoPrueba.Designer.cs">
+    <Compile Include="Models\ModeloClase4.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelCursoPrueba.edmx</DependentUpon>
+      <DependentUpon>ModeloClase4.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Municipio.cs">
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pais.cs">
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPaisDeptoMunicipioListar_Result.cs">
+      <DependentUpon>ModeloClase4.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\BBDDLocal.mdf" />
-    <Content Include="App_Data\BBDDLocal_log.ldf">
-      <DependentUpon>BBDDLocal.mdf</DependentUpon>
-    </Content>
+    <Content Include="App_Data\BBDDLocalClase4.mdf" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ModelCursoPrueba.Context.tt">
+    <Content Include="Models\ModeloClase4.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCursoPrueba.edmx</DependentUpon>
-      <LastGenOutput>ModelCursoPrueba.Context.cs</LastGenOutput>
+      <DependentUpon>ModeloClase4.edmx</DependentUpon>
+      <LastGenOutput>ModeloClase4.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelCursoPrueba.tt">
+    <Content Include="Models\ModeloClase4.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelCursoPrueba.edmx</DependentUpon>
-      <LastGenOutput>ModelCursoPrueba.cs</LastGenOutput>
+      <DependentUpon>ModeloClase4.edmx</DependentUpon>
+      <LastGenOutput>ModeloClase4.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -270,12 +282,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\ModelCursoPrueba.edmx">
+    <EntityDeploy Include="Models\ModeloClase4.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelCursoPrueba.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModeloClase4.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelCursoPrueba.edmx.diagram">
-      <DependentUpon>ModelCursoPrueba.edmx</DependentUpon>
+    <Content Include="Models\ModeloClase4.edmx.diagram">
+      <DependentUpon>ModeloClase4.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
